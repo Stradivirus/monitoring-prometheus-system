@@ -26,17 +26,17 @@ services:
     ports:
       - "9106:9106"
     environment:
-      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY}
-      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_KEY}
-      - AWS_REGION=ap-northeast-2
-      - CLOUDWATCH_CONFIG_CONTENT=|-
-          region: ap-northeast-2
-          metrics:
-            - aws_namespace: AWS/CloudFront
-              aws_metric_name: Requests
-              aws_dimensions: [DistributionId]
-              aws_statistics: [Sum]
-              period_seconds: 300
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_KEY}
+      AWS_REGION: ap-northeast-2
+      CLOUDWATCH_CONFIG_CONTENT: |
+        region: ap-northeast-2
+        metrics:
+          - aws_namespace: AWS/CloudFront
+            aws_metric_name: Requests
+            aws_dimensions: [DistributionId]
+            aws_statistics: [Sum]
+            period_seconds: 300
     entrypoint: >
       sh -c "echo \"$CLOUDWATCH_CONFIG_CONTENT\" > /config/cloudwatch-config.yml &&
              /bin/cloudwatch_exporter --config.file=/config/cloudwatch-config.yml"
