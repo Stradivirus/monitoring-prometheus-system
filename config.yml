@@ -1,6 +1,0 @@
-region: ap-northeast-2
-metrics:
-  - aws_namespace: AWS/CloudFront
-    aws_metric_name: Requests
-    aws_statistics: [Sum]
-    aws_dimensions: [DistributionId]
