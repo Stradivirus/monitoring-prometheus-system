@@ -1,0 +1,7 @@
+region: ap-northeast-2
+metrics:
+  - aws_namespace: AWS/CloudFront
+    aws_metric_name: Requests
+    aws_dimensions: [DistributionId]
+    aws_statistics: [Sum]
+    period_seconds: 300  # 5분
