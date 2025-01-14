@@ -38,8 +38,11 @@ services:
             aws_statistics: [Sum]
             period_seconds: 300
     entrypoint: >
-      sh -c "echo \"$CLOUDWATCH_CONFIG_CONTENT\" > /config/cloudwatch-config.yml &&
-             /bin/cloudwatch_exporter --config.file=/config/cloudwatch-config.yml"
+      sh -c "
+        echo \"$CLOUDWATCH_CONFIG_CONTENT\" > /config/cloudwatch-config.yml &&
+        cat /config/cloudwatch-config.yml &&
+        /cloudwatch_exporter --config.file=/config/cloudwatch-config.yml
+      "
     networks:
       - monitoring-network
     depends_on:
@@ -51,6 +54,7 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
+
 
   grafana:
     container_name: grafana
