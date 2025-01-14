@@ -1,0 +1,25 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'node'
+    static_configs:
+      - targets: ['node-exporter:9100']
+
+  - job_name: 'cloudfront'
+    metrics_path: '/metrics'
+    aws_credentials:
+      access_key: "${AWS_ACCESS_KEY}"
+      secret_key: "${AWS_SECRET_KEY}"
+      region: "ap-northeast-2"
+    aws_cloudwatch:
+      region: ap-northeast-2
+      metrics:
+        - aws_namespace: AWS/CloudFront
+          aws_metric_name: Requests
+          aws_dimensions: [DistributionId]
