@@ -31,9 +31,12 @@ services:
       - GF_AUTH_ANONYMOUS_ENABLED=true
       - GF_AUTH_ANONYMOUS_ORG_ROLE=Viewer
       - GF_DASHBOARDS_MIN_REFRESH_INTERVAL=1m
-      - GF_FEATURE_TOGGLES_ENABLE=timeRangeShift
-      - GF_TIME_RANGE_DEFAULT_TO_NOW=true
-      - GF_TIME_RANGE_DEFAULT_FROM_NOW=3h
+      # 대시보드 기본 시간 설정
+      - GF_DATE_FORMATS_INTERVAL_HOUR=3h
+      - GF_DATE_FORMATS_DEFAULT_TIMEZONE=browser
+      # 자동 새로고침 설정
+      - GF_DEFAULT_REFRESH_INTERVALS=1m
+      - GF_PANELS_DISABLE_SANITIZE_HTML=true
     volumes:
       - grafana_data:/var/lib/grafana
     networks:
@@ -42,7 +45,7 @@ services:
       prometheus:
         condition: service_healthy
     restart: unless-stopped
-    
+
 volumes:
   prometheus_data:
   grafana_data:
