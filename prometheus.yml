@@ -14,7 +14,7 @@ scrape_configs:
   - job_name: 'reservation-postgres'
     metrics_path: '/metrics'
     static_configs:
-      - targets: ['34.64.132.7:9187']
+      - targets: ['10.178.0.2:9187']
 
   - job_name: 'reservation-nginx'
     metrics_path: '/metrics'
@@ -24,9 +24,9 @@ scrape_configs:
   - job_name: 'reservation-cadvisor'
     metrics_path: '/metrics'
     static_configs:
-      - targets: ['34.64.132.7:8090']
+      - targets: ['localhost:8090']
 
   - job_name: 'reservation-node'
     metrics_path: '/metrics'
     static_configs:
-      - targets: ['34.64.132.7:9100']
+      - targets: ['127.0.0.1:9100']
