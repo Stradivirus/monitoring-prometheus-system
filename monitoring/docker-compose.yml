@@ -3,7 +3,7 @@ services:
     container_name: prometheus
     image: prom/prometheus:latest
     ports:
-      - "127.0.0.1:9090:9090"  # 내부에서만 접근 가능
+      - "9090:9090"  # 외부 접근 허용
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
       - prometheus_data:/prometheus
@@ -22,7 +22,7 @@ services:
     container_name: grafana
     image: grafana/grafana:latest
     ports:
-      - "8000:3000"  # 외부 접근 허용
+      - "8000:3000"  # 8000포트로 접근
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=admin
